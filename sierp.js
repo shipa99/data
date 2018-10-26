@@ -12,14 +12,13 @@ ctx.fillStyle = 'white';
 ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
 // Set points
-var x0 = 50, y0 = 700;
+var x0 = 500, y0 = 300;
 
 ctx.beginPath();
 ctx.moveTo(x0, y0);
 
 var x_cur = x0, y_cur = y0;
-var cur_angle = 0;
-cur_angle = cur_angle + (Math.PI/4);
+var cur_angle = Math.PI/4;
 
 function SierpRight(depth, step){
 	if (depth > 0){
@@ -154,6 +153,6 @@ function Sierpinski(depth, step){
 	}
 }
 
-Sierpinski(4, 20);
+SierpLeft(3, 20);
 
 ctx.closePath();
