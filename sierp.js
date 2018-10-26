@@ -9,28 +9,28 @@ var x0 = 700, y0 = 350;
 ctx.beginPath();
 ctx.moveTo(x0, y0);
 
-var xc = x0, yc = y0;
-var ca = 0;
+var x_cur = x0, y_cur = y0;
+var cur_angle = 0;
 
 function SierpRight(depth, step){
 	if (depth > 0){
 		depth = depth - 1;
 
 		SierpRight(depth, step);
-		ca = ca - (Math.Pi/4);
-		ctx.lineTo(xc + step * Math.cos(ca), yc - step * Math.cos(ca));
-		xc = xc + step * Math.cos(ca);
-		yc = yc - step * Math.cos(ca);
+		cur_angle = cur_angle - (Math.Pi/4);
+		ctx.lineTo(x_cur + step * Math.cos(cur_angle), y_cur - step * Math.cos(cur_angle));
+		x_cur = x_cur + step * Math.cos(cur_angle);
+		y_cur = y_cur - step * Math.cos(cur_angle);
 
 		SierpDown(depth, step);
-		ctx.lineTo(xc + 2 * step, yc);
-		xc = xc + step * 2;
+		ctx.lineTo(x_cur + 2 * step, y_cur);
+		x_cur = x_cur + step * 2;
 
 		SierpUp(depth, step);
-		ca = ca + (Math.Pi/4);	
-		ctx.lineTo(xc + step * Math.cos(ca), yc + step * Math.cos(ca));
-		xc = xc + step * Math.cos(ca);
-		yc = yc + step * Math.cos(ca);
+		cur_angle = cur_angle + (Math.Pi/4);	
+		ctx.lineTo(x_cur + step * Math.cos(cur_angle), y_cur + step * Math.cos(cur_angle));
+		x_cur = x_cur + step * Math.cos(cur_angle);
+		y_cur = y_cur + step * Math.cos(cur_angle);
 
 		SierpRight(depth, step);		
 	}
@@ -41,20 +41,20 @@ function SierpDown(depth, step){
 		depth--;
 
 		SierpDown(depth, step);
-		ca = ca - (Math.Pi*3/4);
-		ctx.lineTo(xc - step * Math.cos(ca), yc - step * Math.cos(ca));
-		xc = xc - step * Math.cos(ca);
-		yc = yc - step * Math.cos(ca);
+		cur_angle = cur_angle - (Math.Pi*3/4);
+		ctx.lineTo(x_cur - step * Math.cos(cur_angle), y_cur - step * Math.cos(cur_angle));
+		x_cur = x_cur - step * Math.cos(cur_angle);
+		y_cur = y_cur - step * Math.cos(cur_angle);
 
 		SierpLeft(depth, step);
-		ctx.lineTo(xc, yc - 2 * step);
-		yc = yc - step * 2;
+		ctx.lineTo(x_cur, y_cur - 2 * step);
+		y_cur = y_cur - step * 2;
 
 		SierpRight(depth, step);
-		ca = ca - (Math.Pi/4);	
-		ctx.lineTo(xc + step * Math.cos(ca), yc - step * Math.cos(ca));
-		xc = xc + step * Math.cos(ca);
-		yc = yc - step * Math.cos(ca);
+		cur_angle = cur_angle - (Math.Pi/4);	
+		ctx.lineTo(x_cur + step * Math.cos(cur_angle), y_cur - step * Math.cos(cur_angle));
+		x_cur = x_cur + step * Math.cos(cur_angle);
+		y_cur = y_cur - step * Math.cos(cur_angle);
 
 		SierpDown(depth, step);		
 	}
@@ -65,20 +65,20 @@ function SierpUp(depth, step){
 		depth--;
 
 		SierpUp(depth, step);
-		ca = ca + (Math.Pi/4);
-		ctx.lineTo(xc + step * Math.cos(ca), yc + step * Math.cos(ca));
-		xc = xc + step * Math.cos(ca);
-		yc = yc + step * Math.cos(ca);
+		cur_angle = cur_angle + (Math.Pi/4);
+		ctx.lineTo(x_cur + step * Math.cos(cur_angle), y_cur + step * Math.cos(cur_angle));
+		x_cur = x_cur + step * Math.cos(cur_angle);
+		y_cur = y_cur + step * Math.cos(cur_angle);
 
 		SierpRight(depth, step);
-		ctx.lineTo(yc + 2 * step, yc);
-		yc = xc + step * 2;
+		ctx.lineTo(y_cur + 2 * step, y_cur);
+		y_cur = x_cur + step * 2;
 
 		SierpLeft(depth, step);
-		ca = ca + (Math.Pi*3/4);	
-		ctx.lineTo(xc - step * Math.cos(ca), yc + step * Math.cos(ca));
-		xc = xc - step * Math.cos(ca);
-		yc = yc + step * Math.cos(ca);
+		cur_angle = cur_angle + (Math.Pi*3/4);	
+		ctx.lineTo(x_cur - step * Math.cos(cur_angle), y_cur + step * Math.cos(cur_angle));
+		x_cur = x_cur - step * Math.cos(cur_angle);
+		y_cur = y_cur + step * Math.cos(cur_angle);
 
 		SierpUp(depth, step);		
 	}
@@ -89,20 +89,20 @@ function SierpLeft(depth, step){
 		depth--;
 
 		SierpLeft(depth, step);
-		ca = ca + (Math.Pi*3/4);	
-		ctx.lineTo(xc - step * Math.cos(ca), yc + step * Math.cos(ca));
-		xc = xc - step * Math.cos(ca);
-		yc = yc + step * Math.cos(ca);
+		cur_angle = cur_angle + (Math.Pi*3/4);	
+		ctx.lineTo(x_cur - step * Math.cos(cur_angle), y_cur + step * Math.cos(cur_angle));
+		x_cur = x_cur - step * Math.cos(cur_angle);
+		y_cur = y_cur + step * Math.cos(cur_angle);
 
 		SierpUp(depth, step);
-		ctx.lineTo(xc - 2 * step, yc);
-		xc = xc - step * 2;
+		ctx.lineTo(x_cur - 2 * step, y_cur);
+		x_cur = x_cur - step * 2;
 
 		SierpDown(depth, step);
-		ca = ca + (Math.Pi*5/4);	
-		ctx.lineTo(xc - step * Math.cos(ca), yc - step * Math.cos(ca));
-		xc = xc - step * Math.cos(ca);
-		yc = yc - step * Math.cos(ca);
+		cur_angle = cur_angle + (Math.Pi*5/4);	
+		ctx.lineTo(x_cur - step * Math.cos(cur_angle), y_cur - step * Math.cos(cur_angle));
+		x_cur = x_cur - step * Math.cos(cur_angle);
+		y_cur = y_cur - step * Math.cos(cur_angle);
 
 		SierpLeft(depth, step);		
 	}
